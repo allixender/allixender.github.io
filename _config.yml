@@ -2,10 +2,10 @@
 
 title: Allixender.GitHub.io
 description: One day I might be able to use this
-logo: # 120x120 px default image used for Twitter summary card
+logo: profile1-120.jpg # 120x120 px default image used for Twitter summary card
 teaser: # 400x250 px default teaser image used in image archive grid
 locale: en_NZ
-url:
+url: //allixender.github.io
 
 # Jekyll configuration
 
@@ -32,4 +32,4 @@ owner:
 disqus-shortname:
 
 
-exclude: ["lib", "config.rb", ".sass-cache", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "*.sublime-project", "*.sublime-workspace", "Gemfile", "Gemfile.lock", "README.md", "LICENSE", "node_modules", "Gruntfile.js", "package.json"]
+exclude: ["lib", "config.rb", ".sass-cache", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "*.sublime-project", "*.sublime-workspace", "Gemfile", "Gemfile.lock", "README.md", "LICENSE", "LICENSE.SkinnyBones", "node_modules", "Gruntfile.js", "package.json"]
