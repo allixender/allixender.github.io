@@ -13,6 +13,34 @@ image:
 
 TL;DR: Beginners, use IDEA. Beyond that your mileage may vary.
 
+## IntelliJ IDEA
+
+With IDEA it looked more promising, however, I am still a novice with IDEA and Scala setup. 
+The IntelliJ IDEA scala plugin (in IDEA, not the sbt-idea plugin) has support to import native sbt projects. 
+
+* checkout/clone GeoTrellis
+* in IDEA new project -> import from native model (SBT)
+
+![idea-import1](http://allixender.github.io/images/idea-import1.png)
+
+* select JDK to be assigned
+
+![idea-import2](http://allixender.github.io/images/idea-import2.png)
+
+* wait ...
+
+![idea-import3](http://allixender.github.io/images/idea-import3.png)
+
+* add VCS root (will be offered), just confirm `Add root`, because you are working in the proper git directory
+
+![idea-import4](http://allixender.github.io/images/idea-import4.png)
+
+* add scala sdk (will be offered), just select and confirm `scala 2.10.4` when it pops up
+* done
+* better :-)
+* also thanks for the [link from Chuck](https://groups.google.com/forum/#!topic/geotrellis-user/4R_QSEUZZ9A) 
+(posted 11th of Feb 2015 in the [GeoTrellis Google Group](https://groups.google.com/forum/#!forum/geotrellis-user)
+
 ## Eclipse ScalaIDE (via sbt plugins)
 
 A try with Eclipse and IDEA with geotrellis and sbt plugins, to set up IDE friendly project configuration:
@@ -65,34 +93,6 @@ the geotrellis-spark project. Then those dependencies would resolve. Eclipse als
 context items e.g. implicit conversions.
 
 ![eclipse2-buildpath2](https://cloud.githubusercontent.com/assets/4483885/7805496/061fc680-0363-11e5-8836-c0906ba41412.png)
-
-
-## IntelliJ IDEA
-
-With IDEA it looked more promising, however, I am still a novice with IDEA and Scala setup. 
-The IntelliJ IDEA scala plugin (in IDEA, not the sbt-idea plugin) has support to import native sbt projects. 
-
-* checkout/clone GeoTrellis
-* in IDEA new project -> import from native model (SBT)
-
-![idea-import1](http://allixender.github.io/images/idea-import1.png)
-
-* select JDK to be assigned
-
-![idea-import2](http://allixender.github.io/images/idea-import2.png)
-
-* wait ...
-
-![idea-import3](http://allixender.github.io/images/idea-import3.png)
-
-* add VCS root (will be offered), just confirm `Add root`, because you are working in the proper git directory
-
-![idea-import4](http://allixender.github.io/images/idea-import4.png)
-
-* add scala sdk (will be offered), just select and confirm `scala 2.10.4` when it pops up
-* done
-* better :-)
-* also thanks for the [link from Chuck](https://groups.google.com/forum/#!topic/geotrellis-user/4R_QSEUZZ9A) 
 
 ## Other "IDEs"
 
