@@ -100,6 +100,7 @@ context items e.g. implicit conversions.
 * try [Ensime](http://ensime.github.io/)
 * in the shell, enter sbt console and keep `~compile` going
 * in parallel use [ag - The Silver Searcher](https://github.com/ggreer/the_silver_searcher)
+* for emacs you might also want to look at [Projectile](https://github.com/bbatsov/projectile)
 
 ## A few notes on git for beginners
 
