@@ -1,16 +1,21 @@
-# Skinny Bones Jekyll Starter
+# Me doing so more stuff
 
-Just a little something I'm using to jump start a site refresh. I like to think of it as a starter for building your own Jekyll site. I purposely keep the styling minimal and bare to make it easier to add your own flare and markup.
+I have a background in computer science and worked in the IT industry for several years. 
+Then he decided to change paths slightly and graduated with a 
+Master in Geographical Information Science and Systems at the Interfaculty Department for Geoinformatics (Z_GIS), 
+University of Salzburg, Austria. In New Zealand I joined the GNS Science-led EU-NZ 
+cooperative SMART Aquifer Characterisation Programme. In my PhD studies for the SMART 
+research aim “Data Synthesis and Visualisation”, I aim to develop a web-based geospatial data sharing, 
+processing and 3D/4D visualisation framework hydro(geo)logical datasets for New Zealand.
 
-I'm currently using a variation of it on my personal website [Made Mistakes](http://mademistakes.com) with some modifications. To learn more about how to use the theme and install it check out the [Skinny Bones demo](http://mmistakes.github.io/skinny-bones-jekyll/) (*work in progress*).
+I'm blogging about more general aspects of my research [on Blogspot](http://allixender.blogspot.co.nz/).
 
-![screenshot of Skinny Bones](http://mmistakes.github.io/skinny-bones-jekyll/images/skinny-bones-theme-feature.jpg)
+![Geospatial Web Enablement](http://allixender.github.io/images/geospatial-enablement.png)
 
 ---
 
-## Notable Features
+## Where you can also find me:
 
-* Stylesheet built using Sass. *Requires Jekyll 2.x*
-* Data files for easier customization of the site navigation/footer and for supporting multiple authors.
-* Optional Disqus comments, table of contents, social sharing links, and Google AdSense ads.
-* And more.
+* [on Twitter](https://twitter.com/allixender).
+* [on LinkedIn](https://www.linkedin.com/in/allixender).
+* [on ResearchGate](https://www.researchgate.net/profile/Alexander_Kmoch).
