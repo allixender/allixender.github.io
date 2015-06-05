@@ -1,4 +1,4 @@
-# Me doing so more stuff
+# Me doing some more stuff
 
 I have a background in computer science and worked in the IT industry for several years. 
 Then he decided to change paths slightly and graduated with a 
