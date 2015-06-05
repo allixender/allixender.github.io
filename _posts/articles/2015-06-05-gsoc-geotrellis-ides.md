@@ -36,8 +36,8 @@ The IntelliJ IDEA scala plugin (in IDEA, not the sbt-idea plugin) has support to
 ![idea-import4](http://allixender.github.io/images/idea-import4.png)
 
 * add scala sdk (will be offered), just select and confirm `scala 2.10.4` when it pops up
-* done
-* better :-)
+* done ... there might pop up warnings about multiple versions: This is an artifact of the multiple transitive 
+dependencies, and has not shown to be problematic
 * also thanks for the [link from Chuck](https://groups.google.com/forum/#!topic/geotrellis-user/4R_QSEUZZ9A) 
 (posted 11th of Feb 2015 in the [GeoTrellis Google Group](https://groups.google.com/forum/#!forum/geotrellis-user)
 
