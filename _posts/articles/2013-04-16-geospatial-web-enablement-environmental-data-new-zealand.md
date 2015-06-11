@@ -20,7 +20,7 @@ Through the standardised and web-based access to so many data sources, not only 
 processing and analysis (GIS) based research is made easier, but also complete new technical and methodological 
 research possibilities arise.
 
-## [LINZ - Land Information New Zealand](http://data.linz.govt.nz)
+## LINZ - Land Information New Zealand
 
 I would like to start with Land Information New Zealand ([LINZ](http://www.linz.govt.nz/about-linz)). LINZ, as a governmental body, has issued and 
 maintains [New Zealand’s geospatial strategy](http://www.linz.govt.nz/about-linz/our-location-strategy/sdi-and-open-government-data-programme). LINZ runs the LINZ Data Service, which provide tons of NZ-related 
@@ -32,7 +32,7 @@ basically as long as you tell that it is LINZ data. LINZ provides standard OGC C
 
 More news about the NZ geospatial strategy can be [found on here](http://www.linz.govt.nz/about-linz/our-location-strategy/geospatial-strategy-and-work-programme).
 
-## [DOC – Department of Conservation](http://geoportal.doc.govt.nz)
+## DOC – Department of Conservation
 
 Also the New Zealand [Department of Conservation](http://www.doc.govt.nz/) is going towards geospatial web services. 
 It looks like they use ESRI software, which supports OGC standards to certain bit already, although 
@@ -43,7 +43,7 @@ discovery and WMS/WFS for map/feature data access)
 
 [http://geoportal.doc.govt.nz](http://geoportal.doc.govt.nz)
 
-## [GNS Science Data](http://data.gns.cri.nz/metadata/)
+## GNS Science
 
 [The Institute of Geological and Nuclear Sciences](http://www.gns.cri.nz/) 
 is one of the 9 New Zealand Crown Research Institutes (CRI), which conduct about one 
@@ -64,13 +64,13 @@ to connect OGC based data sources. Within the research aim "Data Synthesis and V
 
 [http://data.gns.cri.nz/metadata/](http://data.gns.cri.nz/metadata/)
 
-## [NIWA – National Institute of Water and Atmospheric Research](http://ei.niwa.co.nz)
+## NIWA – National Institute of Water and Atmospheric Research
 
 [NIWA](http://www.niwa.co.nz/) NIWA, another CRI, has a strong reputation in climate, 
 marine and marine ecosystem and biodiversity sciences.
 Whereas a lot of organisations and agencies make data available first and then (if at all) add more 
 sophisticated search technology, NIWA started the other way round. They established a discovery portal - 
-the Environmental Information Browser, which is basically a catalogue, where one can search by keywords, 
+the [Environmental Information Browser](http://ei.niwa.co.nz), which is basically a catalogue, where one can search by keywords, 
 places, data and time. All the data NIWA has, will eventually be listed and can be queried and also harvested 
 through the OGC CSW interface. Furthermore NIWA is also moving towards providing OGC web services to their data sets. 
 One particular example has been a “[Summer of eResearch](http://www.eresearch.org.nz/soer-projects/sensor-observation-service)” 
@@ -78,7 +78,7 @@ project and [its progress documented on the eResearch website](http://www.eresea
 
 [http://ei.niwa.co.nz](http://ei.niwa.co.nz)
 
-## [LRIS - Landcare Research](https://lris.scinfo.org.nz/)
+## Landcare Research
 
 [Landcare Research](http://www.landcareresearch.co.nz/) is also a New Zealand Crown Research Institute and focuses on the management 
 of terrestrial biodiversity and land resources in order to both protect and enhance the terrestrial 
