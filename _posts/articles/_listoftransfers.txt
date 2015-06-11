@@ -1,0 +1,9 @@
+21/01/2013 http://live-eresearchnz.pantheon.io/content/side-note-geospatial-data-sharing-and-spatial-data-infrastructures-sdi
+
+10/12/2012 http://live-eresearchnz.pantheon.io/content/sensor-observation-service-niwa-climate-database
+14/01/2013 http://live-eresearchnz.pantheon.io/content/climate-database-web-service-1st-review
+04/02/2013 http://live-eresearchnz.pantheon.io/content/sos-clidb-mid-term-we-got-data
+
+2012/05/30 http://blog.52north.org/2012/05/30/dynamic-output-formats-for-the-sensor-observation-service/
+2012/07/04 http://blog.52north.org/2012/07/04/exchangeable-encodings-getting-in-shape/
+2012/08/23 http://blog.52north.org/2012/08/23/demonstrating-exchangeable-encodings-for-sos-a-quantum-leap-for-me/
