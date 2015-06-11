@@ -4,6 +4,10 @@
 14/01/2013 http://live-eresearchnz.pantheon.io/content/climate-database-web-service-1st-review
 04/02/2013 http://live-eresearchnz.pantheon.io/content/sos-clidb-mid-term-we-got-data
 
+2012/02/29 http://www.google-melange.com/gsoc/proposal/review/student/google/gsoc2012/allixender/5707702298738688
+
 2012/05/30 http://blog.52north.org/2012/05/30/dynamic-output-formats-for-the-sensor-observation-service/
 2012/07/04 http://blog.52north.org/2012/07/04/exchangeable-encodings-getting-in-shape/
 2012/08/23 http://blog.52north.org/2012/08/23/demonstrating-exchangeable-encodings-for-sos-a-quantum-leap-for-me/
+
+2015-03-27 /http://www.google-melange.com/gsoc/proposal/review/student/google/gsoc2015/allixender/5676830073815040
