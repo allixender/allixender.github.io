@@ -1,5 +1,3 @@
-21/01/2013 http://live-eresearchnz.pantheon.io/content/side-note-geospatial-data-sharing-and-spatial-data-infrastructures-sdi
-
 10/12/2012 http://live-eresearchnz.pantheon.io/content/sensor-observation-service-niwa-climate-database
 14/01/2013 http://live-eresearchnz.pantheon.io/content/climate-database-web-service-1st-review
 04/02/2013 http://live-eresearchnz.pantheon.io/content/sos-clidb-mid-term-we-got-data
