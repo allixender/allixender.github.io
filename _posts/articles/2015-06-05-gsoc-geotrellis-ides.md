@@ -1,12 +1,12 @@
 ---
 layout: article
-title: Setting up your IDE for development with GeoTrellis
+title: Setting up your IDE for development with GeoTrellis (or any other complex Scala project)
 modified: 2015-06-05
 categories: articles
 tags: [gsoc]
 share: true
 image:
-  teaser: main-teaser-450.png
+  teaser: geotrellis-teaser-450.png
 ---
 
 {% include toc.html %}
