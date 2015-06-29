@@ -8,4 +8,8 @@
 2012/07/04 http://blog.52north.org/2012/07/04/exchangeable-encodings-getting-in-shape/
 2012/08/23 http://blog.52north.org/2012/08/23/demonstrating-exchangeable-encodings-for-sos-a-quantum-leap-for-me/
 
-2015-03-27 /http://www.google-melange.com/gsoc/proposal/review/student/google/gsoc2015/allixender/5676830073815040
+2015-03-27 http://www.google-melange.com/gsoc/proposal/review/student/google/gsoc2015/allixender/5676830073815040
+2015-03-26 http://www.google-melange.com/gsoc/proposal/review/student/google/gsoc2015/allixender/5717271485874176
+
+NASA Spacepps Challenge TetrisGroup
+

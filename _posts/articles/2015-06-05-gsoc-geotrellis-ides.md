@@ -101,6 +101,7 @@ context items e.g. implicit conversions.
 * in the shell, enter sbt console and keep `~compile` going
 * in parallel use [ag - The Silver Searcher](https://github.com/ggreer/the_silver_searcher)
 * for emacs you might also want to look at [Projectile](https://github.com/bbatsov/projectile)
+* for VIM and Scala there has recently been an [interesting article](https://advancedweb.hu/2015/06/11/vim-scala/)
 
 ## A few notes on git for beginners
 
