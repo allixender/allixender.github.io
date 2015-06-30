@@ -39,7 +39,10 @@ bin/spark-class org.apache.spark.deploy.worker.Worker spark://127.0.0.1:7077 >> 
 ```
 
 This GCE instance would cost roughly 200 USD per month. So for the fun of it I cannot afford to have it running all the time. 
-Presumably the whole run incl. installation, compile times, ingests and then benchmark as of now took me maybe already 10-20 hours. 
+Presumably the whole run incl. installation, compile times, ingests and then benchmark as of now took me maybe already 10-20 hours, 
+which would amount to about 20 USD, if I don't push it much further. For a company it's peanuts, for s student it's still great though to 
+be as resourceful as possible.
+
 The actual ingest complained also about not having enough memory to cache RRDs. I now believe, that this is because I forgot to eliminate 
 the driver and executor memory limits of 3 GB which came from my lapt top tests. Those spark-submit cmdlines grow really long parameter 
 lists.
