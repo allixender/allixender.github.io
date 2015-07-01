@@ -29,7 +29,7 @@ the whole lot of install and config manually, to see what needs to be done etc.
 I particularly struggled long time with the GDAL Java bindings until I realised, that the Spark workers / executors also 
 need to know the LD_LIBRARY-PATH or -Djava-library.path for the native lbraries. So in the meantime I also compiled the whole 
 GDAL stack to manually create the GDAL Java bindings, to then compile and link GeoTrellis Gdal modules gainst this 
-local install. Not sure if that's actually necessary. The challenge also seemed 
+local install. Not sure if that's actually necessary.
 
 I configured sort of a stand-alone Spark cluster, with starting the local master `sbin/start-master.sh` and starting two 
 workers with ..
@@ -90,11 +90,31 @@ between these two views:
     2145 user1     20   0 3450064 235220   7244 S   0.3  0.8   0:20.73 java (spark worker)
     2264 user1     20   0 3450064 223608   7204 S   0.3  0.7   0:20.76 java (spark worker)
 
-After maybe half an hour, the driver program ran with about 100% CPU, presumably doing the actual first run of benchmarking.
+After maybe half an hour, the driver program ran with about 100% CPU, presumably doing the actual first run of benchmarking. 
+First result appeared another 2000 seconds later...
+
+       12:12:28 CasBenchmark$: YEARLY AVERAGE OF DIFFERENCES ArraySeq((2024-01-01T00:00:00.000Z,-5.742096174281091), 
+           (2040-01-01T00:00:00.000Z,-4.082999541556946), (2022-01-01T00:00:00.000Z,-6.916643693113496), 
+           (2020-01-01T00:00:00.000Z,-0.12434280860278991), (2032-01-01T00:00:00.000Z,-2.076048279608781), 
+           (2037-01-01T00:00:00.000Z,-3.251362344770221), (2016-01-01T00:00:00.000Z,-2.9338103677725176), 
+           (2008-01-01T00:00:00.000Z,-4.526800691703725), (2025-01-01T00:00:00.000Z,-4.444756317590644), 
+           (2015-01-01T00:00:00.000Z,-1.7933621930024923), (2018-01-01T00:00:00.000Z,1.8317703519666457), 
+           (2030-01-01T00:00:00.000Z,-11.56568235966663), (2029-01-01T00:00:00.000Z,-5.528298940438058), 
+           (2014-01-01T00:00:00.000Z,8.163989162639911), (2012-01-01T00:00:00.000Z,-0.05441557471953986), 
+           (2006-01-01T00:00:00.000Z,-2.6361151595649175), (2007-01-01T00:00:00.000Z,-2.2866075483874537), 
+           (2010-01-01T00:00:00.000Z,-3.5406655772197655), (2011-01-01T00:00:00.000Z,-5.0540570398991695), 
+           (2036-01-01T00:00:00.000Z,-2.0227119828134787), (2023-01-01T00:00:00.000Z,-2.6087549888935255), 
+           (2028-01-01T00:00:00.000Z,-9.611160488520209), (2035-01-01T00:00:00.000Z,-6.24592506571773), 
+           (2027-01-01T00:00:00.000Z,-4.980359765178967), (2009-01-01T00:00:00.000Z,-1.114338171308529), 
+       ...
+       12:12:28 CasBenchmark$: Benchmark: {type: MultiModel-localSubtract-Average, 
+            name: philadelphia, layers: List(Layer(name = "tasmaxrcp60ccsm4", zoom = 3), Layer(name = "tasmaxrcp60ccsm420", zoom = 3))} in 2050063 ms
+
+The calculated data I realised later, was not really meaningful. However, the setup is going in the right direction :-)
 
 ## Future work
 
-Something is really weird .. and slow it seems. Rob from Azavea has mentioned that before, too.
+Concluding, something is really slow it seems. Rob from Azavea has mentioned that before, too.
 
 For GeoTrellis already exists an [AWS EC2 Cluster deployment](https://github.com/geotrellis/geotrellis-ec2-cluster) project and 
 the Cassandra integration is [being developed](https://github.com/geotrellis/geotrellis-ec2-cluster/tree/feature/hmc/cassandra-support). Hmm, I should test that actually :-)
