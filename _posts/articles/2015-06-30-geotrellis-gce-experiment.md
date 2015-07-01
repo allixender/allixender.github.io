@@ -34,17 +34,16 @@ local install. Not sure if that's actually necessary. The challenge also seemed
 I configured sort of a stand-alone Spark cluster, with starting the local master `sbin/start-master.sh` and starting two 
 workers with ..
 
-```shell
-bin/spark-class org.apache.spark.deploy.worker.Worker spark://127.0.0.1:7077 >> worker1.log &
-```
+`bin/spark-class org.apache.spark.deploy.worker.Worker spark://127.0.0.1:7077 >> worker1.log &`
+
 
 I installed an Nginx reverse proxy to see the spark master web console.
 
-```
-location / {
-      proxy_pass http://127.0.0.1:8080;    
-}
-```
+
+    location / {
+          proxy_pass http://127.0.0.1:8080;    
+    }
+
 
 This GCE instance would cost roughly 200 USD per month. So for the fun of it I cannot afford to have it running all the time. 
 Presumably the whole run incl. installation, compile times, ingests and then benchmark as of now took me maybe already 10-20 hours, 
@@ -55,21 +54,19 @@ The actual ingest complained also about not having enough memory to cache RRDs. 
 the driver and executor memory limits of 3 GB which came from my lapt top tests. Those spark-submit cmdlines grow really long parameter 
 lists. However, in the second run of the ingest I was more careful, but the same messages appeared sometimes:
 
-```
-[Stage 4:==============================================================================================================================================>      (23 + 1) / 24]
-11:02:11 MemoryStore: Not enough space to cache rdd_10_23 in memory! (computed 648.7 MB so far)
-```
+    [Stage 4:=================================================================>      (23 + 1) / 24]
+    11:02:11 MemoryStore: Not enough space to cache rdd_10_23 in memory! (computed 648.7 MB so far)
+
 
 The second ingest took a bout 30 minutes.
 
 The data size in Cassandra increased a lot.
 
-```
-user1@cloud-instance1:~$ du -sh apache-cassandra-2.1.7/data/*
-4.0G    apache-cassandra-2.1.7/data/commitlog
-15G     apache-cassandra-2.1.7/data/data
-396K    apache-cassandra-2.1.7/data/saved_caches
-```
+    user1@cloud-instance1:~$ du -sh apache-cassandra-2.1.7/data/*
+    4.0G    apache-cassandra-2.1.7/data/commitlog
+    15G     apache-cassandra-2.1.7/data/data\
+    396K    apache-cassandra-2.1.7/data/saved_caches
+
 BTW, Cassandra determined its own memory requirements. And as it was written somewhere beyond 8GB heap garbage collection 
 in cassandra becomse a real problem. But `ps -ef` shows ` -Xms7540M -Xmx7540M` which seems good (based on the machine with 30 GB RAM overall)
 
@@ -77,26 +74,23 @@ After the second ingest, I could try to run the benchmark and every two to five 
 between these two views:
 
 ... much Cassandra (a short burst)
-```
-  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
- 2476 user1     20   0 12.029g 6.373g  30160 S 800.0 21.6  89:14.95 java (i.e. Cassandra)
- 4572 user1     20   0 12.633g 614064  34084 S   1.0  2.0   0:12.81 java (i.e. geotrellis spark driver)
- 2030 user1     20   0 3515344 256996   7284 S   0.7  0.8   0:24.71 java (spark master)
- 2145 user1     20   0 3450064 235220   7244 S   0.3  0.8   0:20.30 java (spark worker)
- 2264 user1     20   0 3450064 223608   7204 S   0.3  0.7   0:20.33 java (spark worker)
 
-```
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+    2476 user1     20   0 12.029g 6.373g  30160 S 800.0 21.6  89:14.95 java (i.e. Cassandra)
+    4572 user1     20   0 12.633g 614064  34084 S   1.0  2.0   0:12.81 java (i.e. geotrellis spark driver)
+    2030 user1     20   0 3515344 256996   7284 S   0.7  0.8   0:24.71 java (spark master)
+    2145 user1     20   0 3450064 235220   7244 S   0.3  0.8   0:20.30 java (spark worker)
+    2264 user1     20   0 3450064 223608   7204 S   0.3  0.7   0:20.33 java (spark worker)
 
 ... no Cassndra, but also the spark workers don't have much to do.
-```
 
-  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
- 2030 user1     20   0 3515344 256996   7284 S   0.7  0.8   0:25.20 java (i.e. Cassandra)
- 4572 user1     20   0 12.633g 616512  34084 S   0.7  2.0   0:14.03 java (i.e. geotrellis spark driver)
- 2145 user1     20   0 3450064 235220   7244 S   0.3  0.8   0:20.73 java (spark worker)
- 2264 user1     20   0 3450064 223608   7204 S   0.3  0.7   0:20.76 java (spark worker)
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+    2030 user1     20   0 3515344 256996   7284 S   0.7  0.8   0:25.20 java (i.e. Cassandra)
+    4572 user1     20   0 12.633g 616512  34084 S   0.7  2.0   0:14.03 java (i.e. geotrellis spark driver)
+    2145 user1     20   0 3450064 235220   7244 S   0.3  0.8   0:20.73 java (spark worker)
+    2264 user1     20   0 3450064 223608   7204 S   0.3  0.7   0:20.76 java (spark worker)
 
-```
+After maybe half an hour, the driver program ran with about 100% CPU, presumably doing the actual first run of benchmarking.
 
 ## Future work
 
