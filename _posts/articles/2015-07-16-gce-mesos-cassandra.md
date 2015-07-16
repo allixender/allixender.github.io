@@ -519,3 +519,29 @@ your app definition as described by Mesosphere...
 Mesosphere folks [currently recommend deployment via Marathon](https://github.com/mesosphere/cassandra-mesos#running-the-framework) and  
 [provide a marathon.json with a job description](https://teamcity.mesosphere.io/guestAuth/repository/download/Oss_Mesos_Cassandra_CassandraFramework/.lastSuccessful/marathon.json) to deploy Cassandra.
 
+### Different Mesos Cassandra examples
+
+So here the literature gets a bit blurry. And in fact all the examples are easier to reproduce for single nodes. In multiple nodes 
+I just can't seem to get it deployed properly ...
+
+There is this latest approach via Marathon, where an exectutor and framework jarfile are deployed together with a vanilla cassandra package. 
+But there often tend to be resource conflicts. So I tried with biger and bigger machines, a GCE n1-standard-2 with 2 vCPU and 3,7 GB RAM.
+ 
+And most important for the deploy JSON description:
+
+    "id": "marathon-cas12",
+    "instances": 1,
+    "cpus": 0.5,
+    "mem": 512,
+    "ports": [
+     0
+    ],
+
+The upper part seems to provide resources to deploy cassandra, not to run cassandra .. but then for the rescaling in Marathon it doesn't quite seem to make sense! 
+Therefore be generous where cassandra's resources are declared, cassandra will eventually at least claim 1 - 1.2 CPU units and 2GB+ RAM.
+
+And if you use that Marathon.json you have to you the provided jre too,, the framework apparently relies on that.
+
+I find the current state of Cassandra-on-Mesos difficult to reproduce in production.
+
+The scaling is not quite easy to follow up on, if it's reliable or so...
