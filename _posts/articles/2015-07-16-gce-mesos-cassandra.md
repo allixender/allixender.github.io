@@ -105,6 +105,14 @@ Keep the console open as a reference to see how you manipulate GCP objects and i
     --image "https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/images/ubuntu-1404-trusty-v20150316" 
     --no-boot-disk-auto-delete --boot-disk-type "pd-standard" --boot-disk-device-name "mesos1"
     
+    # newer gcloud command version tells to mention scope and tags as comma separated list
+    # also be aware if you want to automatically enable cloud storage (bucket) access via project service acount for the instance change 
+    # the scope to read_write (can only be modified when the instance is either stopped or at creation time IIRC)
+    $> gcloud compute --project "groundwater-cloud" instances create "mesos-3" --zone "us-central1-f" --machine-type "n1-standard-2" 
+    --network "default" --maintenance-policy "MIGRATE" 
+    --scopes https://www.googleapis.com/auth/devstorage.read_write,https://www.googleapis.com/auth/logging.write 
+    --tags http-server,https-server --disk name=mesos-3,device-name=mesos-3,mode=rw,boot=yes
+
 or REST
 
     POST https://www.googleapis.com/compute/v1/projects/groundwater-cloud/zones/us-central1-f/instances
@@ -542,6 +550,11 @@ Therefore be generous where cassandra's resources are declared, cassandra will e
 
 And if you use that Marathon.json you have to you the provided jre too,, the framework apparently relies on that.
 
-I find the current state of Cassandra-on-Mesos difficult to reproduce in production.
+## Conclusion so far
+ 
+I find the current state of Cassandra-on-Mesos difficult to reproduce in production. The scaling is not quite easy to follow up on, and how reliable it is or so...
 
-The scaling is not quite easy to follow up on, if it's reliable or so...
+And thinking of resource hungry cassandra database, you might just add the vanilla install with a template configuration to a base image 
+or the likes, and when bootstrapping the cluster set one or two seed nodes known from your cloud environment. The bootstrap 
+and seed node specialty only happens once a lifetime of the database cluster. If if that seed node goes down later, scaling up 
+by calling out different seed node (just some that are alive basically) will do to dynamically add nodes to the cluster.
