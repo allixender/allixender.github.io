@@ -1,17 +1,17 @@
 ---
 layout: article
-title: Google Cloud Platform SDK Commands to get started
-modified: 2015-07-05
+title: Google Cloud Platform, Cassandra and Mesos
+modified: 2015-07-16
 categories: articles
 tags: [gsoc]
 share: true
 image:
-  teaser: gcloud-teaser-450.png
+  teaser: gsoc2015geocas-teaser-450.png
 ---
 
 {% include toc.html %}
 
-## For beginners, work in progress...
+## Google Cloud Platform, Cassandra and Mesos, work in progress...
 
 Useful `gcloud`, `gsutil` command lines from the Google Cloud Platform (GCP) SDK to get started immediately.
 When you sign up right now for the [Google Cloud Platform](https://cloud.google.com/), you might get a 
@@ -242,9 +242,8 @@ Now also those install files can be placed in the machine
 - unzip, cd into and `./bootstrap
 - `mkdir build`, `cd build` and `../configure`
 - `make`
-- ... wait
 
-Or get a binary [install from Mesosphere](https://mesosphere.com/downloads/) via apt or [package](http://open.mesosphere.com/downloads/mesos/#apache-mesos-0.22.1)
+... oh wait, get a binary [install from Mesosphere](https://mesosphere.com/downloads/) via apt or [package](http://open.mesosphere.com/downloads/mesos/#apache-mesos-0.22.1)
 
     # Setup
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
@@ -291,4 +290,232 @@ Mesosphere folks [currently recommend deployment via Marathon](https://github.co
 Their [mesos cassandra framework](http://mesosphere.github.io/cassandra-mesos/docs/) is supposedly intelligent enough 
 to bootstrap the cassandra cluster which does initially need known and available seed nodes. Subsequently further nodes can be added to the cluster, because the maximum 
 recommended number of seed nodes is only 3.
+
+Ok, almost that simple, the devil is in the details.
+
+### Vanilla Cassandra bootstrap cassandra.yaml
+
+This is a vanilla `cassandra.yaml` config file. Most iportant details here are the `listen_address / rpc_address` and `seed` parameters. 
+Also all nodes in the cluster should share the same `cluster_name`
+You want to bind the native, transport and rpc ports on a networked interface, not on localhost. And in vanilla cassandra 
+the seed nodes (1 to max 3) need be defined beforehand and caveat - they need to be IP address apparently, not hostnames. 
+However, `listen_address` and `rpc_address` I set to the actual resolvable dns hostname, which could alternatively be 
+achieved by setting `listen_interface` to eth0 for example.
+
+    cluster_name: 'Google Cluster'
+    num_tokens: 256
+    hinted_handoff_enabled: true
+    max_hint_window_in_ms: 10800000 # 3 hours
+    hinted_handoff_throttle_in_kb: 1024
+    max_hints_delivery_threads: 2
+    batchlog_replay_throttle_in_kb: 1024
+    authenticator: AllowAllAuthenticator
+    authorizer: AllowAllAuthorizer
+    permissions_validity_in_ms: 2000
+    partitioner: org.apache.cassandra.dht.Murmur3Partitioner
+    disk_failure_policy: stop
+    commit_failure_policy: stop
+    key_cache_size_in_mb:
+    key_cache_save_period: 14400
+    row_cache_size_in_mb: 0
+    row_cache_save_period: 0
+    counter_cache_size_in_mb:
+    counter_cache_save_period: 7200
+    commitlog_sync: periodic
+    commitlog_sync_period_in_ms: 10000
+    commitlog_segment_size_in_mb: 32
+    seed_provider:
+        - class_name: org.apache.cassandra.locator.SimpleSeedProvider
+          parameters:
+              - seeds: "10.240.1.54"
+    concurrent_reads: 32
+    concurrent_writes: 32
+    concurrent_counter_writes: 32
+    memtable_allocation_type: heap_buffers
+    index_summary_capacity_in_mb:
+    index_summary_resize_interval_in_minutes: 60
+    trickle_fsync: false
+    trickle_fsync_interval_in_kb: 10240
+    storage_port: 7000
+    ssl_storage_port: 7001
+    listen_address: mesos-2
+    start_native_transport: true
+    native_transport_port: 9042
+    start_rpc: true
+    rpc_address: mesos-2
+    rpc_port: 9160
+    rpc_keepalive: true
+    rpc_server_type: sync
+    thrift_framed_transport_size_in_mb: 15
+    incremental_backups: false
+    snapshot_before_compaction: false
+    auto_snapshot: true
+    tombstone_warn_threshold: 1000
+    tombstone_failure_threshold: 100000
+    column_index_size_in_kb: 64
+    batch_size_warn_threshold_in_kb: 5
+    compaction_throughput_mb_per_sec: 16
+    sstable_preemptive_open_interval_in_mb: 50
+    read_request_timeout_in_ms: 5000
+    range_request_timeout_in_ms: 10000
+    write_request_timeout_in_ms: 2000
+    counter_write_request_timeout_in_ms: 5000
+    cas_contention_timeout_in_ms: 1000
+    truncate_request_timeout_in_ms: 60000
+    request_timeout_in_ms: 10000
+    cross_node_timeout: false
+    endpoint_snitch: SimpleSnitch
+    dynamic_snitch_update_interval_in_ms: 100
+    dynamic_snitch_reset_interval_in_ms: 600000
+    dynamic_snitch_badness_threshold: 0.1
+    request_scheduler: org.apache.cassandra.scheduler.NoScheduler
+    server_encryption_options:
+        internode_encryption: none
+        keystore: conf/.keystore
+        keystore_password: cassandra
+        truststore: conf/.truststore
+        truststore_password: cassandra
+    client_encryption_options:
+        enabled: false
+        keystore: conf/.keystore
+        keystore_password: cassandra
+    internode_compression: all
+    inter_dc_tcp_nodelay: false
+
+Alternatively as explained, to not need to setting different hostname in each node's yaml
+
+    listen_address:
+    listen_interface: eth0
+    rpc_address:
+    rpc_interface: eth0
+
+And, maybe to be clear, of course each cassandra installation (maybe already included in a base image) should be existing and  
+identical.
+
+For comparison, the mesos-cassandra pre-packaged cassandra.yaml config file. Most obvious, the path names and seed nodes placeholders. 
+Also for some reason `rpc_address` is set to localhost and `listen_address` is left free, which should result in either getting the right 
+address via`hostname` or localhost. Initially this combination is ok on single node test, but in multinode cluster all nodes should be able 
+to talk to each other (gossip) and from Spark whatever via application ports 9042.
+
+The mesos-cassandra package does in fact not need to be pre-installed. Rather the package with customised mesos.yaml and cassandra.yaml should 
+reside somewhere web/network accessible, so the mesos scheduler can pull and deploy it on the nodes it will designate.
+
+Problematic or deceiving is the initially provided mesos.yaml and cassandra.yaml config:
+
+    # mesos.yaml
+    mesos.executor.uri: 'http://downloads.mesosphere.io/cassandra/cassandra-mesos-2.1.2-1.tgz'
+    mesos.master.url: 'zk://localhost:2181/mesos'
+    state.zk: 'localhost:2181'
+    java.library.path: '/usr/local/lib/libmesos.so'
+    cassandra.noOfHwNodes: 1
+    cassandra.minNoOfSeedNodes: 1
+    resource.cpus: 1.0
+    resource.mem: 2048
+    resource.disk: 2000
+
+    # cassandra.yaml
+    cluster_name: 'MesosCluster'
+    num_tokens: 256
+    hinted_handoff_enabled: true
+    max_hint_window_in_ms: 10800000 # 3 hours
+    hinted_handoff_throttle_in_kb: 1024
+    max_hints_delivery_threads: 2
+    batchlog_replay_throttle_in_kb: 1024
+    authenticator: AllowAllAuthenticator
+    authorizer: AllowAllAuthorizer
+    permissions_validity_in_ms: 2000
+    partitioner: org.apache.cassandra.dht.Murmur3Partitioner
+    data_file_directories:
+        - /tmp/cassandra/${clusterName}/data
+    commitlog_directory: /tmp/cassandra/${clusterName}/commitlog
+    disk_failure_policy: stop
+    commit_failure_policy: stop
+    key_cache_size_in_mb:
+    key_cache_save_period: 14400
+    row_cache_size_in_mb: 0
+    row_cache_save_period: 0
+    counter_cache_size_in_mb:
+    counter_cache_save_period: 7200
+    saved_caches_directory: /tmp/cassandra/${clusterName}/saved_caches
+    commitlog_sync: periodic
+    commitlog_sync_period_in_ms: 10000
+    commitlog_segment_size_in_mb: 32
+    seed_provider:
+        - class_name: org.apache.cassandra.locator.SimpleSeedProvider
+          parameters:
+              - seeds: "${seedNodes}"
+    concurrent_reads: 32
+    concurrent_writes: 32
+    concurrent_counter_writes: 32
+    memtable_allocation_type: heap_buffers
+    index_summary_capacity_in_mb:
+    index_summary_resize_interval_in_minutes: 60
+    trickle_fsync: false
+    trickle_fsync_interval_in_kb: 10240
+    storage_port: 7000
+    ssl_storage_port: 7001
+    listen_address:
+    start_native_transport: true
+    native_transport_port: 9042
+    start_rpc: true
+    rpc_address: localhost
+    rpc_port: 9160
+    rpc_keepalive: true
+    rpc_server_type: sync
+    thrift_framed_transport_size_in_mb: 15
+    incremental_backups: false
+    snapshot_before_compaction: false
+    auto_snapshot: true
+    tombstone_warn_threshold: 1000
+    tombstone_failure_threshold: 100000
+    column_index_size_in_kb: 64
+    batch_size_warn_threshold_in_kb: 5
+    compaction_throughput_mb_per_sec: 16
+    sstable_preemptive_open_interval_in_mb: 50
+    read_request_timeout_in_ms: 5000
+    range_request_timeout_in_ms: 10000
+    write_request_timeout_in_ms: 2000
+    counter_write_request_timeout_in_ms: 5000
+    cas_contention_timeout_in_ms: 1000
+    truncate_request_timeout_in_ms: 60000
+    request_timeout_in_ms: 10000
+    cross_node_timeout: false
+    endpoint_snitch: SimpleSnitch
+    dynamic_snitch_update_interval_in_ms: 100
+    dynamic_snitch_reset_interval_in_ms: 600000
+    dynamic_snitch_badness_threshold: 0.1
+    request_scheduler: org.apache.cassandra.scheduler.NoScheduler
+    server_encryption_options:
+        internode_encryption: none
+        keystore: conf/.keystore
+        keystore_password: cassandra
+        truststore: conf/.truststore
+        truststore_password: cassandra
+    client_encryption_options:
+        enabled: false
+        keystore: conf/.keystore
+        keystore_password: cassandra
+    internode_compression: all
+    inter_dc_tcp_nodelay: false
+
+The mesos.yaml provides zookeeper endpoint to find the mesos-master as well as a few scaling parameters ... AND the package 
+that will be deployed on the nodes in the cluster. This package then again contains the provided cassandra.yaml config 
+that needs to be fitted for our deployment!
+
+Reconciling so far. Updating the cassandra.yaml and mesos.yaml to reflect our deployment, including the designated URL from where to pull  
+our customised package, uploading the now configured cassandra-mesos folder to that location, and then one can initiate the framework via 
+`bin/cassandra-mesos` (just like `bin/cassandra`).
+
+So far so good. That deploys and starts a cassandra cluster with multiple instances throughout our mesos cluster and you don't have to think 
+about seed nodes yourself, all bootstrapping included. You still need the cassandra `nodetool` and `cqlsh` commands handy 
+from your "work directory" if you want to have a look into the cluster yourself.
+
+The deployment happens with the predefined size, BUT there are no handy means to add more nodes/instances via standard mesos techniques (TBC?).
+
+Here is where Mesos Marathon comes into play again. Marathon basically handles deployments as long running apps and keeps 
+a handle on them so you can scale them up and down through their lifetime. Also Maraton provides a REST api where you POST 
+your app definition as described by Mesosphere...
+
+Mesosphere folks [currently recommend deployment via Marathon](https://github.com/mesosphere/cassandra-mesos#running-the-framework) and  
+[provide a marathon.json with a job description](https://teamcity.mesosphere.io/guestAuth/repository/download/Oss_Mesos_Cassandra_CassandraFramework/.lastSuccessful/marathon.json) to deploy Cassandra.
 
