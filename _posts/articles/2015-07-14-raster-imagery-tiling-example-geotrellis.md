@@ -1,7 +1,7 @@
 ---
 layout: article
 title: Insights into Raster Imagery Tiling with GeoTrellis
-modified: 2015-07-16
+modified: 2015-07-22
 categories: articles
 tags: [gsoc]
 share: true
@@ -16,3 +16,4 @@ image:
 ### Tiling in GeoTrellis Spark
 
 ### Example QGis project to show raster and tile extents
+
