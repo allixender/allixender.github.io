@@ -1,4 +1,5 @@
-# Me doing some more stuff
+# Me doing some more stuff [![OpenHUB](https://www.openhub.net/accounts/alexkmoch/widgets/account_tiny?format=gif&amp;ref=sample)](https://www.openhub.net/accounts/alexkmoch?ref=sample)
+
 
 I have a background in computer science and worked in the IT industry for several years. 
 Then he decided to change paths slightly and graduated with a 
