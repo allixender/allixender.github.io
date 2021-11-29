@@ -14,7 +14,8 @@ sass:
     style: compressed
 permalink: /:categories/:title/
 markdown: kramdown
-highlighter: pygments
+# highlighter: pygments
+highlighter: rouge
 gems:
   - jekyll-sitemap
 
@@ -22,7 +23,7 @@ gems:
 # Site owner
 owner:
   name: Alex K
-  email: allixender@googlemail.com
+  email: allixender@gmail.com
   twitter: allixender
   google:
     ad-client:

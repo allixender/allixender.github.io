@@ -6,7 +6,7 @@ categories: articles
 tags: [btl, ramblings]
 share: true
 image:
-  teaser: eos_basic_arandr1.jpg
+  teaser: eos_basic_arandr1_sm.png
 ---
 
 {% include toc.html %}
