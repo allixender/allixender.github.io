@@ -8,3 +8,7 @@ _asset_bundler_cache
 .sass-cache
 .idea
 .directory
+
+# manual draft exclude for GH pages
+
+_posts/articles/*draft_.md

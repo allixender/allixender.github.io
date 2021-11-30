@@ -24,15 +24,9 @@ Now I have a basic multi-screen layout, which looks like that.
 ![but_then_it_was_like](/images/eos_basic_arandr1.jpg)
 
 
-## Tools, tools, tools
+## Notes and todos
 
-I love vim, I'll give `nvim` a short over the next time. I guess, it won't be much of a difference, since I don't do much magic with `vim` plugins ... yet :-) Here are some links to try, I am really keen on checking that out myself:
-
-- [NeoVim and must-have plugins](https://jdhao.github.io/2018/12/24/centos_nvim_install_use_guide_en/)
-- [NeoVim as Python IDE](https://ramezanpour.net/post/2021/04/24/My-ultimate-Neovim-configuration-for-Python-development)
-- [NeoVim Rust](https://sharksforarms.dev/posts/neovim-rust/)
-
-Next thing, Joplin. After spreading notes and todos over many different platforms, incl. but not limited to Trello, Google Docs and Google Todo and Google Keep, MS Office OneNote, PomoDone and even some full-on Sphinx docs, I realized, more notes/todo functionality is not needed, but I still need to keep my stuff together. I recently read a very revealing blogpost about some dudes who built a very successful todo and note taking app, and users loved it and wanted more features. The more features the developers implemented, the less the users actually got done. But they still kept on piling more todos.
+After spreading notes and todos over many different platforms, incl. but not limited to Trello, Google Docs and Google Todo and Google Keep, MS Office OneNote, PomoDone and even some full-on Sphinx docs, I realized, more notes/todo functionality is not needed, but I still need to keep my stuff together. I recently read a very revealing blogpost about some dudes who built a very successful todo and note taking app, and users loved it and wanted more features. The more features the developers implemented, the less the users actually got done. But they still kept on piling more todos.
 Joplin also nicely syncs cross-platform via WebDAV and a few classic online storage providers. We have NextCloud from the university and it serves as an excellent cross-platform base for that as well. Joplin is only available in the AUR. EndevourOS Arch cames with `yay` as an AUR helper. I have used `yaourt` and `trizen` as well in the past. Personally, I don't have too much in-depth knowledge about difference and why some are discontinued. There are always some of those useful tools around.
 
 ```bash
