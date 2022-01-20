@@ -63,6 +63,17 @@ Also, I love vim, I'll give `nvim` a short over the next time. I guess, it won't
 - [NeoVim Rust](https://sharksforarms.dev/posts/neovim-rust/)
 - [Rust tooling for nvim](https://github.com/simrat39/rust-tools.nvim)
 
+- Jesse Archer VimConf video awesome: https://www.youtube.com/watch?v=434tljD-5C8
+
+[Kitty terminal](https://sw.kovidgoyal.net/kitty/) turned out to be quite nice with Jesse's config. But then, it is a terminal and the defualt XFCE4 terminal is also nice.
+Anyhow, playing around with both. I also found more interesting materials to style up NVIM:
+
+- Jesse Archer's dotfiles for nvim: https://github.com/jessarcher/dotfiles/tree/master/nvim/plugins
+- DistroTube: https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/nvim/init.vim
+
+N/VIM plugins, omg, you can get lost.
+
+
 ## Also, backup
 
 Admittedly, I haven't done actual backups of my file systems regularly, as most of my work stuff is either in GitHub, Google Cloud Buckets, Nextcloud or shared network drives. And privately I use Google Drive/Google One and NextCloud as well.
