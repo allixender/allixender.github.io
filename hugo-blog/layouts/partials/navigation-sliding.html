@@ -1,0 +1,18 @@
+{{/* navigation-sliding.html */}}
+<nav role="navigation" id="js-menu" class="sliding-menu-content">
+  <h5>{{ .Site.Title }} <span>Table of Contents</span></h5>
+  <ul class="menu-item">
+    {{ range .Site.Data.navigation }}<li>
+      <a href="{{ .Site.BaseURL }}{{ .url }}">
+        {{ if .image }}<img src="{{ .Site.BaseURL }}images/{{ .image }}" alt="teaser" class="teaser">{{ end }}
+        <div class="title">{{ .title }}</div>
+        {{ if .excerpt }}<p class="excerpt">{{ .excerpt }}</p>{{ end }}
+      </a>
+    </li>{{ end }}
+  </ul>
+</nav>
+<button type="button" id="js-menu-trigger" class="sliding-menu-button lines-button x2" role="button" aria-label="Toggle Navigation">
+  <span class="nav-lines"></span>
+</button>
+
+<div id="js-menu-screen" class="menu-screen"></div>

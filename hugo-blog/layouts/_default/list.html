@@ -1,0 +1,24 @@
+{{/* list.html - archive layout equivalent */}}
+{{ define "main" }}
+<div id="main" role="main">
+	<div class="wrap">
+		{{ if .Params.image.feature }}
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="{{ .Site.BaseURL }}images/{{ .Params.image.feature }}" class="page-feature-image" alt="{{ .Title }}">
+				{{ if .Params.image.credit }}{{ partial "image-credit.html" . }}{{ end }}
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		{{ end }}
+		<div class="page-title">
+			<h1>{{ .Title }}</h1>
+			{{ if .Description }}<h2>{{ .Description }}</h2>{{ end }}
+		</div>
+		<div class="archive-wrap">
+			<div class="page-content">
+				{{ .Content }}
+			</div><!-- /.page-content -->
+		</div class="archive-wrap"><!-- /.archive-wrap -->
+	</div><!-- /.wrap -->
+</div><!-- /#main -->
+{{ end }}

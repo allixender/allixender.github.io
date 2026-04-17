@@ -1,0 +1,22 @@
+{{/* footer.html */}}
+<footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		{{ range .Site.Data.footer }}
+      {{ if findRE "^http" .url }}
+        {{ $.Scratch.Set "domain" "" }}
+      {{ else }}
+        {{ $.Scratch.Set "domain" .Site.BaseURL }}
+      {{ end }}
+			<li><a href="{{ $.Scratch.Get "domain" }}{{ .url }}" {{ if findRE "^http" .url }}target="_blank"{{ end }}>{{ .title }}</a></li>
+		{{ end }}
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">
+		<a target="_blank" href="https://www.openhub.net/accounts/alexkmoch?ref=sample"><img alt='Open Hub profile for Alex K' border='0' height='15' src='https://www.openhub.net/accounts/alexkmoch/widgets/account_tiny?format=gif&amp;ref=sample' width='80'></a>
+		<a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/nz/">
+		<img alt="Creative Commons License Attribution-ShareAlike 3.0 New Zealand (C BY-SA 3.0 NZ)" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/3.0/80x15.png" /></a>
+		{{ now.Format "2006" }}
+		<a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+		is powered by <a href="https://gohugo.io/" rel="nofollow">Hugo</a> + custom template.
+</footer>

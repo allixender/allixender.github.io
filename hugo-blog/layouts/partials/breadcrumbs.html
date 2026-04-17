@@ -1,0 +1,14 @@
+{{/* breadcrumbs.html */}}
+{{ if and .Params.categories (ne .Params.categories nil) }}
+  <nav class="breadcrumbs">
+    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+      <a href="{{ .Site.BaseURL }}" itemprop="url">
+        <span itemprop="title">Home</span>
+      </a> › 
+    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+      <a href="{{ .Site.BaseURL }}{{ index .Params.categories 0 }}/" itemprop="url">
+        <span itemprop="title">{{ index .Params.categories 0 | replace "-" " " | title }}</span>
+      </a>
+    </span>
+  </nav><!-- /.breadcrumbs -->
+{{ end }}

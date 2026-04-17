@@ -1,0 +1,8 @@
+{{/* index.html - homepage with post grid */}}
+{{ define "main" }}
+<div class="tiles">
+{{ range where .Site.RegularPages "Section" "posts" }}
+	{{ partial "post-card.html" . }}
+{{ end }}
+</div><!-- /.tiles -->
+{{ end }}

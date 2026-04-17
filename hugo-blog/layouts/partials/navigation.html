@@ -1,0 +1,12 @@
+{{/* navigation.html */}}
+<ul class="menu-item">
+	<li class="home"><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></li>
+	{{ range .Site.Data.navigation }}
+    {{ if findRE "^http" .url }}
+        {{ $.Scratch.Set "domain" "" }}
+    {{ else }}
+        {{ $.Scratch.Set "domain" .Site.BaseURL }}
+    {{ end }}
+    <li><a href="{{ $.Scratch.Get "domain" }}{{ .url }}" {{ if findRE "^http" .url }}target="_blank"{{ end }}>{{ .title }}</a></li>
+  {{ end }}
+</ul>

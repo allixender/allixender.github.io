@@ -12,3 +12,5 @@ _asset_bundler_cache
 # manual draft exclude for GH pages
 
 _posts/articles/*draft_.md
+hugo-blog/public/
+hugo-blog/dist/

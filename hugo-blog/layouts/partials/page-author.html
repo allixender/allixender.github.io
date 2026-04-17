@@ -1,0 +1,15 @@
+{{/* page-author.html */}}
+{{ $.Scratch.Set "author" .Site.Data.authors }}
+{{ if .Params.author }}
+  {{ $.Scratch.Set "author" (index .Site.Data.authors .Params.author) }}
+{{ else }}
+  {{ $.Scratch.Set "author" .Site.Params }}
+{{ end }}
+
+<div class="author-image">
+	<img src="{{ .Site.BaseURL }}images/{{ ($.Scratch.Get "author").avatar }}" alt="{{ ($.Scratch.Get "author").name }}">
+</div><!-- ./author-image -->
+<div class="author-content">
+	<h3 class="author-name" >Written by {% if ($.Scratch.Get "author").web %}<a href="{{ ($.Scratch.Get "author").web }}" itemprop="author">{{ ($.Scratch.Get "author").name }}</a>{% else %}<span itemprop="author">{{ ($.Scratch.Get "author").name }}</span>{% endif %}</h3>
+	<p class="author-bio">{{ ($.Scratch.Get "author").bio }}</p>
+</div><!-- ./author-content -->

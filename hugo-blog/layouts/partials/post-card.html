@@ -1,0 +1,13 @@
+{{/* post-card.html - post-grid equivalent */}}
+<article class="tile" itemscope itemtype="http://schema.org/Article">
+  <a href="{{ .RelPermalink }}" title="{{ .Title }}" class="post-teaser">
+    {{ if .Params.image.teaser }}
+    <img src="{{ .Site.BaseURL }}images/{{ .Params.image.teaser }}" alt="teaser" itemprop="image">
+    {{ else }}
+    <img src="{{ .Site.BaseURL }}images/{{ .Site.Params.teaser }}" alt="teaser" itemprop="image">
+    {{ end }}
+  </a>
+  {{ if .Date }}<p class="entry-date date published"><time datetime="{{ .Date.Format "2006-01-02" }}" itemprop="datePublished">{{ .Date.Format "January 02, 2006" }}</time></p>{{ end }}
+  <h2 class="post-title" itemprop="name"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+  <p class="post-excerpt" itemprop="description">{{ .Summary | plainify | truncate 160 }}</p>
+</article><!-- /.tile -->

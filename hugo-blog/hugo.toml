@@ -1,0 +1,18 @@
+baseURL = '//allixender.github.io/'
+languageCode = 'en-NZ'
+title = 'Allixender.GitHub.io'
+description = 'Me doing some more stuff'
+paginate = 10
+
+[params]
+  teaser = 'main-teaser-450.png'
+  logo = 'profile1-120.jpg'
+  author = 'Alex K'
+  avatar = 'profile1-120.jpg'
+
+[permalinks]
+  posts = '/:year/:month/:day/:slug/'
+
+[taxonomies]
+  category = 'categories'
+  tag = 'tags'

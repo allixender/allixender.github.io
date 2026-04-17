@@ -1,0 +1,33 @@
+{{/* single.html - article layout equivalent */}}
+{{ define "main" }}
+<div id="main" role="main">
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		{{ if .Params.image.feature }}
+		<div class="page-feature">
+			<div class="page-image">
+				<img src="{{ .Site.BaseURL }}images/{{ .Params.image.feature }}" class="page-feature-image" alt="{{ .Title }}" itemprop="image">
+				{{ if .Params.image.credit }}{{ partial "image-credit.html" . }}{{ end }}
+			</div><!-- /.page-image -->
+		</div><!-- /.page-feature -->
+		{{ end }}
+		{{ partial "breadcrumbs.html" . }}
+		<div class="page-title">
+			<h1>{{ .Title }}</h1>
+		</div>
+		<div class="inner-wrap">
+			<div id="content" class="page-content" itemprop="articleBody">
+				{{ .Content }}
+				<hr />
+				<footer class="page-footer">
+					{{ if .Params.categories }}{{ partial "page-author.html" . }}{{ end }}
+					{{ if ne .Params.share false }}{{ partial "share-this.html" . }}{{ end }}
+					{{ partial "page-meta.html" . }}
+				</footer><!-- /.footer -->
+				<aside>
+					{{ if .Params.comments }}{{ partial "comments.html" . }}{{ end }}
+				</aside>
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+	</article><!-- /.wrap -->
+</div><!-- /#main -->
+{{ end }}
